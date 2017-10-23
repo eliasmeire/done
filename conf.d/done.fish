@@ -55,15 +55,15 @@ and test -n __done_get_window_id  # is able to get window id
 			# Store duration of last command
 			set duration (echo "$CMD_DURATION" | humanize_duration)
 
-			set -l title "Done in $duration"
+			set -l title "Done in $duration 😄"
 			set -l message "$history[1]"
 
 			if test $exit_status -ne 0
-				set title "Exited ($exit_status) after $duration"
+				set title "Failed after $duration 😡"
 			end
 
 			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id"
+				terminal-notifier -activate "com.googlecode.iterm2" -message "$message" -title "$title" -sender "$__done_initial_window_id"
 
 			else if type -q osascript  # AppleScript
 				osascript -e "display notification \"$message\" with title \"$title\""
