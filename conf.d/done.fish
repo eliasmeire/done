@@ -63,13 +63,13 @@ and test -n __done_get_window_id  # is able to get window id
 			end
 
 			if type -q terminal-notifier  # https://github.com/julienXX/terminal-notifier
-				terminal-notifier -activate "com.googlecode.iterm2" -message "$message" -title "$title" -sender "$__done_initial_window_id"
+				terminal-notifier -activate "com.googlecode.iterm2" -message "$message" -title "$title" -sender "$__done_initial_window_id" > /dev/null
 
 			else if type -q osascript  # AppleScript
-				osascript -e "display notification \"$message\" with title \"$title\""
+				osascript -e "display notification \"$message\" with title \"$title\"" > /dev/null
 
 			else if type -q notify-send # Linux notify-send
-				notify-send --icon=terminal "$title" "$message"
+				notify-send --icon=terminal "$title" "$message" > /dev/null
 
 			else  # anything else
 				echo -e "\a" # bell sound
